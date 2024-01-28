@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     //Hedef an
-    DateTime targetDate = DateTime(2024, 1, 29, 11);
+    DateTime targetDate = DateTime(2024, 1, 30, 11);
 
     //Tekrar dedin sayaç(zamana bağlı işlemler için)
     Timer.periodic(Duration(seconds: 1), (timer) {
