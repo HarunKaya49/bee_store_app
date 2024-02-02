@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1018193641818",
+    "firebase_url": "https://bee-store-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bee-store-app",
+    "storage_bucket": "bee-store-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018193641818:android:3fa836d55fec07d1c33363",
+        "android_client_info": {
+          "package_name": "com.example.bee_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWBfhLVVqvCbYO6su0oiQAL0M7Aobd9Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,22 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
+import 'package:bee_store/Par%C3%A7alar/anasayfa_urun_widget.dart';
+import 'package:bee_store/Parçalar/anasayfa_katagori_widget.dart';
+import 'package:bee_store/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import "package:bee_store/firebase_options.dart";
 
 // Fonksiyon Tanımlamak
-void main() {
+Future<void> main() async {
   // Fonksiyon Çağırmak
   print("İlk işlem başarılı olarak çalıştırıldı.");
   islem(selamlamaMetni, sayi);
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const MyApp());
 }
@@ -196,146 +205,63 @@ class _MyAppState extends State<MyApp> {
                       const SizedBox(
                         width: 16,
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/FashionCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Fashion"),
-                          ),
-                        ],
-                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Fashion",
+                          resimAdresi: "varliklar/FashionCart.png"),
                       const SizedBox(
                         width: 20,
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/ElectronicCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Electronics"),
-                          ),
-                        ],
-                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Electronics",
+                          resimAdresi: "varliklar/ElectronicCart.png"),
                       const SizedBox(
                         width: 20,
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/AppliancesCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Appliances"),
-                          ),
-                        ],
-                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Appliances",
+                          resimAdresi: "varliklar/AppliancesCart.png"),
                       const SizedBox(
                         width: 20,
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/BeautyCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Beauty"),
-                          ),
-                        ],
-                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Beauty",
+                          resimAdresi: "varliklar/BeautyCart.png"),
                       const SizedBox(
                         width: 20,
                       ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/FurnitureCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Furiture"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/FashionCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Fashion"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/ElectronicCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Electronics"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/AppliancesCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Appliances"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/BeautyCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Beauty"),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        children: [
-                          Image.asset(
-                            "varliklar/FurnitureCart.png",
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text("Furiture"),
-                          ),
-                        ],
-                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Furiture",
+                          resimAdresi: "varliklar/FurnitureCart.png"),
                       const SizedBox(
                         width: 16,
                       ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Fashion",
+                          resimAdresi: "varliklar/FashionCart.png"),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Electronics",
+                          resimAdresi: "varliklar/ElectronicCart.png"),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Appliances",
+                          resimAdresi: "varliklar/AppliancesCart.png"),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Beauty",
+                          resimAdresi: "varliklar/BeautyCart.png"),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      AnasayfaKatagoriWidget(
+                          katagoriBaslik: "Furiture",
+                          resimAdresi: "varliklar/FurnitureCart.png"),
                     ],
                   ),
                 ),
@@ -670,23 +596,44 @@ class _MyAppState extends State<MyApp> {
                   child: Row(children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Image.asset(
-                        "varliklar/Adidas1.png",
-                        width: 150,
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/Adidas1.png",
+                        baslik: "Adidas white sneakers for men",
+                        usdFiyat: 68,
+                        indirimOrani: 20,
+                        indirimsizFiyat: 136,
+                        puan: 4.8,
+                        degerlendirmeSayisi: 692,
+                        topSellerVarMi: true,
+                        favorideMi: true,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        "varliklar/Nike1.png",
-                        width: 150,
+                      padding: const EdgeInsets.all(5.0),
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/Nike1.png",
+                        baslik: "Nike black running shoes for men",
+                        usdFiyat: 75,
+                        indirimOrani: 20,
+                        indirimsizFiyat: 90,
+                        puan: 4.2,
+                        degerlendirmeSayisi: 412,
+                        topSellerVarMi: false,
+                        favorideMi: false,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Image.asset(
-                        "varliklar/NikeSky2.png",
-                        width: 150,
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/NikeSky2.png",
+                        baslik: "Nike sky blue & white Sneakers",
+                        usdFiyat: 137,
+                        indirimOrani: 25,
+                        indirimsizFiyat: 171.25,
+                        puan: 4.0,
+                        degerlendirmeSayisi: 124,
+                        topSellerVarMi: true,
+                        favorideMi: true,
                       ),
                     )
                   ]),
@@ -729,26 +676,47 @@ class _MyAppState extends State<MyApp> {
                   scrollDirection: Axis.horizontal,
                   child: Row(children: [
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Image.asset(
-                        "varliklar/Allen.png",
-                        width: 150,
+                      padding: const EdgeInsets.all(10.0),
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/allen.png",
+                        baslik: "Allen Solly Regular fit cotton shirt",
+                        usdFiyat: 35,
+                        indirimOrani: 15,
+                        indirimsizFiyat: 40.25,
+                        puan: 4.4,
+                        degerlendirmeSayisi: 412,
+                        topSellerVarMi: true,
+                        favorideMi: true,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Image.asset(
-                        "varliklar/Calvin.png",
-                        width: 150,
+                      padding: const EdgeInsets.all(5.0),
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/calvin.png",
+                        baslik: "Calvin Clein Regular fit slim fit shirt",
+                        usdFiyat: 52,
+                        indirimOrani: 20,
+                        indirimsizFiyat: 62.4,
+                        puan: 4.2,
+                        degerlendirmeSayisi: 214,
+                        topSellerVarMi: false,
+                        favorideMi: false,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
-                      child: Image.asset(
-                        "varliklar/H&M.png",
-                        width: 150,
+                      padding: const EdgeInsets.all(10.0),
+                      child: AnasayfaUrunWidget(
+                        resimAdresi: "varliklar/h&m.png",
+                        baslik: "H&M half regular fit cotton shirt",
+                        usdFiyat: 60,
+                        indirimOrani: 25,
+                        indirimsizFiyat: 75,
+                        puan: 4.0,
+                        degerlendirmeSayisi: 254,
+                        topSellerVarMi: true,
+                        favorideMi: true,
                       ),
-                    )
+                    ),
                   ]),
                 ),
               ],
@@ -905,6 +873,11 @@ class Insan {
   }
 }
 
+int dogumYiliniHesapla() {
+  DateTime simdi = DateTime.now();
+  return simdi.year - yas;
+}
+
 void islem(String Metin, int sayi) {
   for (int i = 0; i < sayi; i++) {
     print(Metin);
@@ -925,5 +898,10 @@ class Ogrenci extends Insan {
       this.okulNumara,
       this.okulIsmi) {
     print("Öğrenci sınfı oluşturuldu.");
+  }
+
+  @override
+  int dogumYiliniHesapla() {
+    return 2002;
   }
 }
