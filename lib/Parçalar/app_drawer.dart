@@ -86,8 +86,8 @@ class AppDrawer extends StatelessWidget {
             FirebaseAuth.instance.signOut();
             Scaffold.of(context).closeDrawer();
           },
-          leading: Icon(Icons.logout),
-          title: Text("Logout"),
+          leading: const Icon(Icons.logout),
+          title: const Text("Logout"),
         ),
       ]),
     );

@@ -1,23 +1,16 @@
-import 'dart:math';
-
 import 'package:bee_store/Par%C3%A7alar/anasayfa_urun_widget.dart';
 import 'package:bee_store/Par%C3%A7alar/app_bottom_navigation_bar.dart';
 import 'package:bee_store/Par%C3%A7alar/app_drawer.dart';
 import 'package:bee_store/Parçalar/anasayfa_katagori_widget.dart';
-import 'package:bee_store/firebase_options.dart';
-import 'package:bee_store/urun_detay_ekrani.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:bee_store/Par%C3%A7alar/anasayfa_kucuk_baslik_widget.dart';
-import "package:bee_store/firebase_options.dart";
 
 class Anasayfa extends StatefulWidget {
-  const Anasayfa({Key? key}) : super(key: key);
+  const Anasayfa({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AnasayfaState createState() => _AnasayfaState();
 }
 
@@ -29,7 +22,7 @@ class _AnasayfaState extends State<Anasayfa> {
   //pageView in bulunduğu sayfayı kontol için değişken
   int currentPage = 0;
   //slider noktaları
-  late Color dot1 = Color.fromRGBO(29, 78, 216, 1);
+  late Color dot1 = const Color.fromRGBO(29, 78, 216, 1);
   late Color dot2 = Colors.grey;
   late Color dot3 = Colors.grey;
   late Color dot4 = Colors.grey;
@@ -45,21 +38,21 @@ class _AnasayfaState extends State<Anasayfa> {
     DateTime targetDate = DateTime(2024, 2, 30, 11);
 
     //Tekrar dedin sayaç(zamana bağlı işlemler için)
-    Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        int nextPage = (controller.page?.round() ?? 0) + 1;
-        if (nextPage > 4) {
-          nextPage = 0;
-        }
-        if (sayac == 8) {
-          controller.animateToPage(nextPage,
-              duration: Duration(milliseconds: 500), curve: Curves.ease);
-          sayac = 0;
-        }
-        sayac++;
-        _timeUntilTarget = targetDate.difference(DateTime.now());
-      });
-    });
+    // Timer.periodic(Duration(seconds: 1), (timer) {
+    //   setState(() {
+    //     int nextPage = (controller.page?.round() ?? 0) + 1;
+    //     if (nextPage > 4) {
+    //       nextPage = 0;
+    //     }
+    //     if (sayac == 8) {
+    //       controller.animateToPage(nextPage,
+    //           duration: Duration(milliseconds: 500), curve: Curves.ease);
+    //       sayac = 0;
+    //     }
+    //     sayac++;
+    //     _timeUntilTarget = targetDate.difference(DateTime.now());
+    //   });
+    // });
 
     //Hedef ana kalan sürenin hesaplandığı yer
     _timeUntilTarget = targetDate.difference(DateTime.now());
@@ -70,35 +63,35 @@ class _AnasayfaState extends State<Anasayfa> {
         currentPage = controller.page?.round() ?? 0;
         switch (currentPage) {
           case 0:
-            dot1 = Color.fromRGBO(29, 78, 216, 1);
+            dot1 = const Color.fromRGBO(29, 78, 216, 1);
             dot2 = Colors.grey;
             dot3 = Colors.grey;
             dot4 = Colors.grey;
             dot5 = Colors.grey;
           case 1:
             dot1 = Colors.grey;
-            dot2 = Color.fromRGBO(29, 78, 216, 1);
+            dot2 = const Color.fromRGBO(29, 78, 216, 1);
             dot3 = Colors.grey;
             dot4 = Colors.grey;
             dot5 = Colors.grey;
           case 2:
             dot1 = Colors.grey;
             dot2 = Colors.grey;
-            dot3 = Color.fromRGBO(29, 78, 216, 1);
+            dot3 = const Color.fromRGBO(29, 78, 216, 1);
             dot4 = Colors.grey;
             dot5 = Colors.grey;
           case 3:
             dot1 = Colors.grey;
             dot2 = Colors.grey;
             dot3 = Colors.grey;
-            dot4 = Color.fromRGBO(29, 78, 216, 1);
+            dot4 = const Color.fromRGBO(29, 78, 216, 1);
             dot5 = Colors.grey;
           case 4:
             dot1 = Colors.grey;
             dot2 = Colors.grey;
             dot3 = Colors.grey;
             dot4 = Colors.grey;
-            dot5 = Color.fromRGBO(29, 78, 216, 1);
+            dot5 = const Color.fromRGBO(29, 78, 216, 1);
         }
       });
     });
@@ -152,7 +145,7 @@ class _AnasayfaState extends State<Anasayfa> {
               ),
             ),
             //Katagoriler
-            AnasayfaKucukBaslikWidget(kucukBaslik: "Categories"),
+            const AnasayfaKucukBaslikWidget(kucukBaslik: "Categories"),
             const SizedBox(height: 16),
             //Katagori Resimler (Kaydırma)
             SingleChildScrollView(
@@ -177,13 +170,11 @@ class _AnasayfaState extends State<Anasayfa> {
                               title: data['name'],
                               imageUrl: data['imageUrl'],
                             ),
-                          SizedBox(
-                            width: 4,
-                          )
+                          const SizedBox(width: 4)
                         ],
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -218,6 +209,7 @@ class _AnasayfaState extends State<Anasayfa> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -260,17 +252,17 @@ class _AnasayfaState extends State<Anasayfa> {
                     ),
                   ),
                 ],
-                mainAxisAlignment: MainAxisAlignment.center,
               ),
             ),
             //Deal of the day + Sayaç + Özel indirimler
             Container(
               color: const Color.fromRGBO(246, 246, 246, 1),
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    AnasayfaKucukBaslikWidget(kucukBaslik: "Deal of the day"),
+                    const AnasayfaKucukBaslikWidget(
+                        kucukBaslik: "Deal of the day"),
                     Row(
                       children: [
                         Padding(
@@ -280,14 +272,14 @@ class _AnasayfaState extends State<Anasayfa> {
                             height: 30,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
-                              color: Color.fromARGB(255, 239, 68, 68),
+                              color: const Color.fromARGB(255, 239, 68, 68),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Text(
                                 "${_timeUntilTarget.inDays} DAY ${_timeUntilTarget.inHours % 24} HRS ${_timeUntilTarget.inMinutes % 60} MIN ${_timeUntilTarget.inSeconds % 60} SEC",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color.fromARGB(255, 255, 255, 255)),
                               ),
                             ),
@@ -301,7 +293,7 @@ class _AnasayfaState extends State<Anasayfa> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color.fromRGBO(255, 255, 255, 1),
+                            color: const Color.fromRGBO(255, 255, 255, 1),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(13.0),
@@ -313,19 +305,19 @@ class _AnasayfaState extends State<Anasayfa> {
                                       children: [
                                         Image.asset(
                                             "varliklar/resimler/Running.png"),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
                                           child: Text("Running Shoes"),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 239, 68, 68),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(5.0),
                                             child: Text(
                                               "Upto 40% OFF",
                                               style: TextStyle(
@@ -341,19 +333,19 @@ class _AnasayfaState extends State<Anasayfa> {
                                       children: [
                                         Image.asset(
                                             "varliklar/resimler/Sneakers.png"),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                        const Padding(
+                                          padding: EdgeInsets.all(8.0),
                                           child: Text("Sneakers"),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(5),
-                                            color: Color.fromARGB(
+                                            color: const Color.fromARGB(
                                                 255, 239, 68, 68),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
+                                          child: const Padding(
+                                            padding: EdgeInsets.all(5.0),
                                             child: Text(
                                               "40-60% OFF",
                                               style: TextStyle(
@@ -375,20 +367,19 @@ class _AnasayfaState extends State<Anasayfa> {
                                         children: [
                                           Image.asset(
                                               "varliklar/resimler/Wrist.png"),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: Text("Wrist Watches"),
                                           ),
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 239, 68, 68),
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(5.0),
                                               child: Text(
                                                 "Upto 40% OFF",
                                                 style: TextStyle(
@@ -404,20 +395,19 @@ class _AnasayfaState extends State<Anasayfa> {
                                         children: [
                                           Image.asset(
                                               "varliklar/resimler/Speaker.png"),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                          const Padding(
+                                            padding: EdgeInsets.all(8.0),
                                             child: Text("Bluetooth Speakers"),
                                           ),
                                           Container(
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   255, 239, 68, 68),
                                             ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(5.0),
+                                            child: const Padding(
+                                              padding: EdgeInsets.all(5.0),
                                               child: Text(
                                                 "40-60% OFF",
                                                 style: TextStyle(
@@ -441,14 +431,15 @@ class _AnasayfaState extends State<Anasayfa> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             //Hot Selling Footwear
-            AnasayfaKucukBaslikWidget(kucukBaslik: "Hot Selling Footwear"),
-            SingleChildScrollView(
+            const AnasayfaKucukBaslikWidget(
+                kucukBaslik: "Hot Selling Footwear"),
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/Adidas1.png",
                     baslik: "Adidas white sneakers for men",
@@ -462,7 +453,7 @@ class _AnasayfaState extends State<Anasayfa> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: EdgeInsets.all(5.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/Nike1.png",
                     baslik: "Nike black running shoes for men",
@@ -476,7 +467,7 @@ class _AnasayfaState extends State<Anasayfa> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/NikeSky2.png",
                     baslik: "Nike sky blue & white Sneakers",
@@ -491,14 +482,14 @@ class _AnasayfaState extends State<Anasayfa> {
                 )
               ]),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Recommended for you
-            AnasayfaKucukBaslikWidget(kucukBaslik: "Recommended for you"),
-            SingleChildScrollView(
+            const AnasayfaKucukBaslikWidget(kucukBaslik: "Recommended for you"),
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(children: [
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/allen.png",
                     baslik: "Allen Solly Regular fit cotton shirt",
@@ -512,7 +503,7 @@ class _AnasayfaState extends State<Anasayfa> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: EdgeInsets.all(5.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/calvin.png",
                     baslik: "Calvin Clein Regular fit slim fit shirt",
@@ -526,7 +517,7 @@ class _AnasayfaState extends State<Anasayfa> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(10.0),
                   child: AnasayfaUrunWidget(
                     resimAdresi: "varliklar/resimler/h&m.png",
                     baslik: "H&M half regular fit cotton shirt",

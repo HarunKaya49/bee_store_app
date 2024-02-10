@@ -159,7 +159,7 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                       ),
                     ),
                     Text("${widget.indirimOrani}% OFF",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12,
                             color: Color.fromRGBO(234, 88, 12, 1))),
                   ],
@@ -174,9 +174,9 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                       decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(4),
-                        color: Color.fromRGBO(245, 158, 11, 1),
+                        color: const Color.fromRGBO(245, 158, 11, 1),
                       ),
-                      child: Center(
+                      child: const Center(
                           child:
                               Icon(Icons.star, color: Colors.white, size: 12))),
                   if (widget.puan % 1 == 0)

@@ -6,7 +6,7 @@ class AppBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: [
+      items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: "Home",
@@ -28,8 +28,8 @@ class AppBottomNavBar extends StatelessWidget {
           backgroundColor: Color.fromARGB(50, 25, 155, 120),
         ),
       ],
-      selectedLabelStyle: TextStyle(color: Colors.black),
-      unselectedLabelStyle: TextStyle(color: Colors.black),
+      selectedLabelStyle: const TextStyle(color: Colors.black),
+      unselectedLabelStyle: const TextStyle(color: Colors.black),
       showSelectedLabels: true,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
