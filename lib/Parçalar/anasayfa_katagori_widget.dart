@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 
-class AnasayfaKatagoriWidget extends StatefulWidget {
+class AnasayfaKatagoriWidget extends StatelessWidget {
   const AnasayfaKatagoriWidget({
     super.key,
-    required this.katagoriBaslik,
-    required this.resimAdresi,
+    required this.title,
+    required this.imageUrl,
   });
 
-  final String katagoriBaslik;
-  final String resimAdresi;
+  final String title;
+  final String imageUrl;
 
-  @override
-  State createState() => _AnasayfaKatagoriWidgetState();
-}
-
-class _AnasayfaKatagoriWidgetState extends State<AnasayfaKatagoriWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image.asset(widget.resimAdresi),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Text(widget.katagoriBaslik),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Column(
+        children: [
+          Image.network(imageUrl),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(title),
+          ),
+        ],
+      ),
     );
   }
 }

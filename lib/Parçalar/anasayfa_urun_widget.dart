@@ -32,7 +32,7 @@ class AnasayfaUrunWidget extends StatefulWidget {
   // }
 }
 
-// String resimAdresi = "varliklar/Adidas1.png";
+// String resimAdresi = "varliklar/resimler/Adidas1.png";
 // String baslik = "Adidas white sneakers for men";
 // double usdFiyat = 68.5;
 // bool favorideMi = false;
