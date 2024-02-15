@@ -1,7 +1,9 @@
+import 'package:bee_store/cubitler/sepet_cubit.dart';
 import 'package:bee_store/modeller/urun_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AnasayfaUrunWidget extends StatefulWidget {
   const AnasayfaUrunWidget({
@@ -167,40 +169,33 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                     ),
                   Text("(${widget.urun.degerlendirmeSayisi})"),
                   const Spacer(),
-                  StreamBuilder(
-                      stream: userDoc.snapshots(),
-                      builder: (_, snapshot) {
-                        if (snapshot.hasData) {
-                          final List cartArray = snapshot.data!['cart'] ?? [];
-                          final inCart = cartArray.contains(widget.urun.uid);
+                  BlocBuilder<SepetCubit, List<String>>(builder: (_, sepet) {
+                    final inCart = sepet.contains(widget.urun.uid);
 
-                          return IconButton(
-                            onPressed: () {
-                              if (inCart) {
-                                userDoc.update({
-                                  'cart':
-                                      FieldValue.arrayRemove([widget.urun.uid])
-                                });
-                              } else {
-                                userDoc.update({
-                                  'cart':
-                                      FieldValue.arrayUnion([widget.urun.uid])
-                                });
-                              }
-                            },
-                            icon: inCart
-                                ? const Icon(
-                                    Icons.shopping_bag,
-                                    size: 20,
-                                  )
-                                : const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 20,
-                                  ),
-                          );
+                    return IconButton(
+                      onPressed: () {
+                        if (inCart) {
+                          userDoc.update({
+                            'cart': FieldValue.arrayRemove([widget.urun.uid])
+                          });
+                        } else {
+                          userDoc.update({
+                            'cart': FieldValue.arrayUnion([widget.urun.uid])
+                          });
                         }
-                        return const Center(child: CircularProgressIndicator());
-                      })
+                      },
+                      icon: inCart
+                          ? const Icon(
+                              Icons.shopping_bag,
+                              size: 20,
+                            )
+                          : const Icon(
+                              Icons.shopping_bag_outlined,
+                              size: 20,
+                            ),
+                    );
+                    return const Center(child: CircularProgressIndicator());
+                  })
                 ]),
               )
             ],

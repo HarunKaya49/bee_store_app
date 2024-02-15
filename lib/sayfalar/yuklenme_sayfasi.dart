@@ -1,7 +1,9 @@
+import 'package:bee_store/cubitler/sepet_cubit.dart';
 import 'package:bee_store/sayfalar/anasayfa.dart';
 import 'package:bee_store/sayfalar/giris_sayfasi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class YuklenmeSayfasi extends StatelessWidget {
   const YuklenmeSayfasi({super.key});
@@ -14,7 +16,12 @@ class YuklenmeSayfasi extends StatelessWidget {
           final girisYapildi = snapshot.hasData && snapshot.data != null;
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: girisYapildi ? const Anasayfa() : const GirisSayfasi(),
+            home: girisYapildi
+                ? BlocProvider(
+                    create: (_) => SepetCubit(),
+                    child: const Anasayfa(),
+                  )
+                : const GirisSayfasi(),
           );
         });
   }

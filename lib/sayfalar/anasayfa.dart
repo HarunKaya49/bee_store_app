@@ -1,6 +1,7 @@
 import 'package:bee_store/Par%C3%A7alar/anasayfa_urun_widget.dart';
 import 'package:bee_store/Par%C3%A7alar/app_bottom_navigation_bar.dart';
 import 'package:bee_store/Par%C3%A7alar/app_drawer.dart';
+import 'package:bee_store/Par%C3%A7alar/sepet_button_widget.dart';
 import 'package:bee_store/Parçalar/anasayfa_katagori_widget.dart';
 import 'package:bee_store/modeller/urun_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -114,13 +115,7 @@ class _AnasayfaState extends State<Anasayfa> {
             ),
             onPressed: () {},
           ),
-          IconButton(
-              icon: Image.asset(
-                "varliklar/resimler/bag.png",
-                width: 24.5,
-                height: 24.5,
-              ),
-              onPressed: () {})
+          const SepetIconButton(),
         ],
       ),
       body: SingleChildScrollView(

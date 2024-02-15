@@ -81,6 +81,7 @@ class _GirisSayfasiState extends State<GirisSayfasi> {
                       password: _sifre,
                     )
                         .catchError(
+                      // ignore: body_might_complete_normally_catch_error
                       (hataMesaji) {
                         _hataMesaji = hataMesaji.toString();
                         _yukleniyor = false;
