@@ -2,6 +2,7 @@ import 'package:bee_store/Par%C3%A7alar/anasayfa_urun_widget.dart';
 import 'package:bee_store/Par%C3%A7alar/app_bottom_navigation_bar.dart';
 import 'package:bee_store/Par%C3%A7alar/app_drawer.dart';
 import 'package:bee_store/Parçalar/anasayfa_katagori_widget.dart';
+import 'package:bee_store/modeller/urun_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bee_store/Par%C3%A7alar/anasayfa_kucuk_baslik_widget.dart';
@@ -271,16 +272,16 @@ class _AnasayfaState extends State<Anasayfa> {
                           child: Container(
                             height: 30,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: const Color.fromARGB(255, 239, 68, 68),
-                            ),
+                                borderRadius: BorderRadius.circular(5),
+                                color: const Color.fromARGB(255, 239, 68, 68)),
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Text(
                                 "${_timeUntilTarget.inDays} DAY ${_timeUntilTarget.inHours % 24} HRS ${_timeUntilTarget.inMinutes % 60} MIN ${_timeUntilTarget.inSeconds % 60} SEC",
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255)),
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
                               ),
                             ),
                           ),
@@ -435,53 +436,31 @@ class _AnasayfaState extends State<Anasayfa> {
             //Hot Selling Footwear
             const AnasayfaKucukBaslikWidget(
                 kucukBaslik: "Hot Selling Footwear"),
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/Adidas1.png",
-                    baslik: "Adidas white sneakers for men",
-                    usdFiyat: 68,
-                    indirimOrani: 20,
-                    indirimsizFiyat: 136,
-                    puan: 4.8,
-                    degerlendirmeSayisi: 692,
-                    topSellerVarMi: true,
-                    favorideMi: true,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/Nike1.png",
-                    baslik: "Nike black running shoes for men",
-                    usdFiyat: 75,
-                    indirimOrani: 20,
-                    indirimsizFiyat: 90,
-                    puan: 4.2,
-                    degerlendirmeSayisi: 412,
-                    topSellerVarMi: false,
-                    favorideMi: false,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/NikeSky2.png",
-                    baslik: "Nike sky blue & white Sneakers",
-                    usdFiyat: 137,
-                    indirimOrani: 25,
-                    indirimsizFiyat: 171.25,
-                    puan: 4.0,
-                    degerlendirmeSayisi: 124,
-                    topSellerVarMi: true,
-                    favorideMi: true,
-                  ),
-                )
-              ]),
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('Products')
+                    .snapshots(),
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    final urunler = snapshot.data!.docs
+                        .map((e) => UrunModel.fromFirestore(e.data(), e.id));
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (final urun in urunler)
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: AnasayfaUrunWidget(urun: urun),
+                            ),
+                        ],
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
             const SizedBox(height: 20),
             // Recommended for you
             const AnasayfaKucukBaslikWidget(kucukBaslik: "Recommended for you"),
@@ -490,45 +469,12 @@ class _AnasayfaState extends State<Anasayfa> {
               child: Row(children: [
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/allen.png",
-                    baslik: "Allen Solly Regular fit cotton shirt",
-                    usdFiyat: 35,
-                    indirimOrani: 15,
-                    indirimsizFiyat: 40.25,
-                    puan: 4.4,
-                    degerlendirmeSayisi: 412,
-                    topSellerVarMi: true,
-                    favorideMi: true,
-                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(5.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/calvin.png",
-                    baslik: "Calvin Clein Regular fit slim fit shirt",
-                    usdFiyat: 52,
-                    indirimOrani: 20,
-                    indirimsizFiyat: 62.4,
-                    puan: 4.2,
-                    degerlendirmeSayisi: 214,
-                    topSellerVarMi: false,
-                    favorideMi: false,
-                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(10.0),
-                  child: AnasayfaUrunWidget(
-                    resimAdresi: "varliklar/resimler/h&m.png",
-                    baslik: "H&M half regular fit cotton shirt",
-                    usdFiyat: 60,
-                    indirimOrani: 25,
-                    indirimsizFiyat: 75,
-                    puan: 4.0,
-                    degerlendirmeSayisi: 254,
-                    topSellerVarMi: true,
-                    favorideMi: true,
-                  ),
                 ),
               ]),
             ),
