@@ -1,6 +1,5 @@
 import 'package:bee_store/cubitler/sepet_cubit.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bee_store/sayfalar/sepet_sayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +8,6 @@ class SepetIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-
-    final userDoc =
-        FirebaseFirestore.instance.collection('users').doc(user.uid);
-
     return IconButton(
         icon: Stack(
           children: [
@@ -40,6 +34,14 @@ class SepetIconButton extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: () {});
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => BlocProvider.value(
+                        value: BlocProvider.of<SepetCubit>(context),
+                        child: const SepetSayfasi(),
+                      )));
+        });
   }
 }

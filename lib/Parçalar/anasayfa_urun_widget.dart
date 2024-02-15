@@ -1,7 +1,6 @@
 import 'package:bee_store/cubitler/sepet_cubit.dart';
 import 'package:bee_store/modeller/urun_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,10 +40,6 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
     final productsData =
         FirebaseFirestore.instance.collection('Products').doc(widget.urun.uid);
 
-    final user = FirebaseAuth.instance.currentUser;
-
-    final userDoc =
-        FirebaseFirestore.instance.collection('users').doc(user!.uid);
     return Card(
       surfaceTintColor: Colors.white,
       shadowColor: Colors.white,
@@ -157,16 +152,12 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                       child: const Center(
                           child:
                               Icon(Icons.star, color: Colors.white, size: 12))),
-                  if (widget.urun.puan % 1 == 0)
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text("${widget.urun.puan}.0"),
-                    )
-                  else
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Text(widget.urun.puan.toString()),
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text((widget.urun.puan % 1 == 0)
+                        ? "${widget.urun.puan}.0"
+                        : widget.urun.puan.toString()),
+                  ),
                   Text("(${widget.urun.degerlendirmeSayisi})"),
                   const Spacer(),
                   BlocBuilder<SepetCubit, List<String>>(builder: (_, sepet) {
@@ -174,27 +165,16 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
 
                     return IconButton(
                       onPressed: () {
-                        if (inCart) {
-                          userDoc.update({
-                            'cart': FieldValue.arrayRemove([widget.urun.uid])
-                          });
-                        } else {
-                          userDoc.update({
-                            'cart': FieldValue.arrayUnion([widget.urun.uid])
-                          });
-                        }
+                        context
+                            .read<SepetCubit>()
+                            .sepeteUrunEkleCikar(widget.urun.uid);
                       },
-                      icon: inCart
-                          ? const Icon(
-                              Icons.shopping_bag,
-                              size: 20,
-                            )
-                          : const Icon(
-                              Icons.shopping_bag_outlined,
-                              size: 20,
-                            ),
+                      icon: Icon(
+                        inCart
+                            ? Icons.shopping_bag
+                            : Icons.shopping_bag_outlined,
+                      ),
                     );
-                    return const Center(child: CircularProgressIndicator());
                   })
                 ]),
               )

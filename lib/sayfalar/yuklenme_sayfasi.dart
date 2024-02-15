@@ -18,7 +18,7 @@ class YuklenmeSayfasi extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: girisYapildi
                 ? BlocProvider(
-                    create: (_) => SepetCubit(),
+                    create: (_) => SepetCubit(snapshot.data!.uid),
                     child: const Anasayfa(),
                   )
                 : const GirisSayfasi(),
