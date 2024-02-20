@@ -34,7 +34,8 @@ class _GirisSayfasiState extends State<GirisSayfasi> {
                 ),
               ),
             TextField(
-              decoration: const InputDecoration(hintText: "Email adresini gir"),
+              decoration:
+                  const InputDecoration(hintText: "Email adresinizi giriniz"),
               keyboardType: TextInputType.emailAddress,
               onChanged: (deger) {
                 _email = deger;
@@ -48,7 +49,7 @@ class _GirisSayfasiState extends State<GirisSayfasi> {
             ),
             const SizedBox(height: 24),
             TextField(
-              decoration: const InputDecoration(hintText: "Şifreni gir"),
+              decoration: const InputDecoration(hintText: "Şifrenizi giriniz"),
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
               onChanged: (deger) {

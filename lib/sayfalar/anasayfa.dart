@@ -434,6 +434,7 @@ class _AnasayfaState extends State<Anasayfa> {
             StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection('Products')
+                    .where('isHotSelling', isEqualTo: true)
                     .snapshots(),
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
@@ -459,20 +460,32 @@ class _AnasayfaState extends State<Anasayfa> {
             const SizedBox(height: 20),
             // Recommended for you
             const AnasayfaKucukBaslikWidget(kucukBaslik: "Recommended for you"),
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(10.0),
-                ),
-              ]),
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('Products')
+                    .where('isRecommend', isEqualTo: true)
+                    .snapshots(),
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    final urunler = snapshot.data!.docs
+                        .map((e) => UrunModel.fromFirestore(e.data(), e.id));
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          for (final urun in urunler)
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: AnasayfaUrunWidget(urun: urun),
+                            ),
+                        ],
+                      ),
+                    );
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:bee_store/sayfalar/admin_paneli.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -80,6 +81,14 @@ class AppDrawer extends StatelessWidget {
         const ListTile(
           leading: Icon(Icons.privacy_tip_outlined),
           title: Text("Privacy Policy"),
+        ),
+        ListTile(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const AdminPaneli())));
+          },
+          leading: const Icon(Icons.admin_panel_settings_outlined),
+          title: const Text("Admin Paneli"),
         ),
         ListTile(
           onTap: () {

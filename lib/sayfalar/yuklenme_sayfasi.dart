@@ -1,3 +1,4 @@
+import 'package:bee_store/cubitler/favori_cubit.dart';
 import 'package:bee_store/cubitler/sepet_cubit.dart';
 import 'package:bee_store/sayfalar/anasayfa.dart';
 import 'package:bee_store/sayfalar/giris_sayfasi.dart';
@@ -19,7 +20,10 @@ class YuklenmeSayfasi extends StatelessWidget {
             home: girisYapildi
                 ? BlocProvider(
                     create: (_) => SepetCubit(snapshot.data!.uid),
-                    child: const Anasayfa(),
+                    child: BlocProvider(
+                      create: (_) => FavoriCubit(snapshot.data!.uid),
+                      child: const Anasayfa(),
+                    ),
                   )
                 : const GirisSayfasi(),
           );

@@ -7,7 +7,6 @@ class UrunModel {
   final double puan;
   final int degerlendirmeSayisi;
   final bool topSellerVarMi;
-  final bool favorideMi;
 
   const UrunModel({
     required this.uid,
@@ -18,7 +17,6 @@ class UrunModel {
     required this.puan,
     required this.degerlendirmeSayisi,
     required this.topSellerVarMi,
-    required this.favorideMi,
   });
 
   factory UrunModel.fromFirestore(Map map, String uid) {
@@ -31,7 +29,6 @@ class UrunModel {
       puan: map['score'],
       degerlendirmeSayisi: map['evaluationNumber'],
       topSellerVarMi: map['isTopSeller'],
-      favorideMi: map['isFavorite'],
     );
   }
 }

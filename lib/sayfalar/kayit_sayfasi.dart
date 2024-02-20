@@ -38,7 +38,8 @@ class _KayitSayfasiState extends State<KayitSayfasi> {
                 ),
               ),
             TextField(
-              decoration: const InputDecoration(hintText: "İsim soyisim gir"),
+              decoration:
+                  const InputDecoration(hintText: "İsim soyisim giriniz"),
               onChanged: (deger) {
                 _isimSoyisim = deger;
                 if (_hataMesaji.isNotEmpty) {
@@ -48,7 +49,8 @@ class _KayitSayfasiState extends State<KayitSayfasi> {
               },
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Email adresini gir"),
+              decoration:
+                  const InputDecoration(hintText: "Email adresinizi giriniz"),
               keyboardType: TextInputType.emailAddress,
               onChanged: (deger) {
                 _email = deger;
@@ -62,7 +64,7 @@ class _KayitSayfasiState extends State<KayitSayfasi> {
               height: 24,
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Şifreni gir"),
+              decoration: const InputDecoration(hintText: "Şifreni giriniz"),
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
               onChanged: (deger) {

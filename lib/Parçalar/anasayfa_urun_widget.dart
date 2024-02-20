@@ -1,6 +1,6 @@
+import 'package:bee_store/cubitler/favori_cubit.dart';
 import 'package:bee_store/cubitler/sepet_cubit.dart';
 import 'package:bee_store/modeller/urun_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,9 +37,6 @@ const
 class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
   @override
   Widget build(BuildContext context) {
-    final productsData =
-        FirebaseFirestore.instance.collection('Products').doc(widget.urun.uid);
-
     return Card(
       surfaceTintColor: Colors.white,
       shadowColor: Colors.white,
@@ -77,23 +74,27 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                               )),
                         ),
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          productsData.update({
-                            'isFavorite': !widget.urun.favorideMi,
-                          });
-                          setState(() {});
+                      BlocBuilder<FavoriCubit, List<String>>(
+                        builder: (_, favori) {
+                          final isFavorite = favori.contains(widget.urun.uid);
+                          return IconButton(
+                            onPressed: () {
+                              context
+                                  .read<FavoriCubit>()
+                                  .favoriyeUrunEkleCikar(widget.urun.uid);
+                            },
+                            icon: isFavorite
+                                ? const Icon(
+                                    Icons.favorite,
+                                    color: Color.fromRGBO(239, 68, 68, 1),
+                                    size: 20,
+                                  )
+                                : const Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 20,
+                                  ),
+                          );
                         },
-                        icon: widget.urun.favorideMi
-                            ? const Icon(
-                                Icons.favorite,
-                                color: Color.fromRGBO(239, 68, 68, 1),
-                                size: 20,
-                              )
-                            : const Icon(
-                                Icons.favorite_border_rounded,
-                                size: 20,
-                              ),
                       )
                     ],
                   ),
@@ -117,7 +118,7 @@ class _AnasayfaUrunWidgetState extends State<AnasayfaUrunWidget> {
                 child: Row(
                   children: [
                     Text(
-                      "\$${widget.urun.usdFiyat * (1 - widget.urun.indirimOrani)}",
+                      "\$${(widget.urun.usdFiyat * (1 - widget.urun.indirimOrani)).toInt()}",
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),

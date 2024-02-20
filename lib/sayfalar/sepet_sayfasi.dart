@@ -28,7 +28,9 @@ class SepetSayfasi extends StatelessWidget {
                       return Card(
                         child: ListTile(
                           title: Text(urun.baslik),
-                          subtitle: Text(urun.usdFiyat.toString()),
+                          subtitle: Text(
+                              (urun.usdFiyat * (1 - urun.indirimOrani))
+                                  .toString()),
                         ),
                       );
                     }
